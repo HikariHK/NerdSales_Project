@@ -1,0 +1,379 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+header {
+    background-color: #9670B3;
+    padding: 10px; /* Espaçamento interno */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #9670B3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 4px 5.2px 0px rgba(0, 0, 0, 0.58);
+}
+
+
+/* Style for nav-left */
+
+
+
+.nav-left{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+
+
+.nav-left img {
+    height: 55px; /* Altura da logo */
+}
+
+/* Style for nav-center */
+
+.nav-left .roll{
+    margin-left: 20px;
+}
+
+.nav-left .roll a{
+    font-weight: 600;
+    padding: 8px;
+    background-color: #5C4681;
+    color: white;
+    margin: 1px;
+    font-size: 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+
+.nav-left img {
+    height: 55px; /* Altura da logo */
+}
+
+/* Transition for nav-left */
+
+.nav-left .roll a:hover{
+    background-color: white;
+    color: #5C4681;
+}
+
+.nav-center {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    margin: 0 20px; /* Espaçamento entre a logo e a barra de pesquisa */
+}
+
+.navbar .nav-center form {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav-center form input {
+    width: 100%; /* Preenche todo o espaço disponível */
+    padding: 5px; /* Espaçamento interno */
+    border: 1px solid #ddd; /* Borda */
+    border-radius: 5px 0px 0px 5px; /* Cantos arredondados */
+    font-size: 20px;
+}
+
+.navbar .nav-center form input:focus{
+    outline: none;
+}
+
+.navbar .nav-center form button {
+    background-color: #5C4681; /* Cor de fundo do botão de pesquisa */
+    color: white; /* Cor do texto do botão de pesquisa */
+    border: none; /* Remove a borda do botão */
+    border-radius: 0px 5px 5px 0px; /* Cantos arredondados do botão */
+    cursor: pointer;
+}
+
+.navbar .nav-center form span{
+    font-size: 29.2px;
+}
+
+/* Style for nav-right */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.nav-right a {
+    margin-left: 15px; /* Espaçamento entre os ícones */
+}
+
+.nav-right span{
+    height: 100%; /* Altura dos ícones */
+    width: 100%;
+    font-size: 35px;
+    margin: 10px;
+    color: #FFFFFF;
+    transition: color 300ms ease-in-out;
+}
+
+/* Transition for nav-right */
+
+.nav-right span:hover{
+    color: #dfdfdf;
+}
+
+/* Style for submenu inside menu button */
+.submenu {
+    z-index: 999;
+    width: 100%;
+    display: none;
+    position: absolute;
+    top: 76px;
+    right: 0;
+    background-color: #9670B3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: display 300ms ease-in-out; /* Adiciona a transição para o display */
+}
+
+.submenu a {
+    margin: 0;
+    display: inline-block;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.submenu a:hover {
+    background-color: white;
+    color: #5C4681;
+}
+
+.navbar-2 {
+    z-index: 2;
+    width: 100%; /* Largura máxima da barra de navegação */
+    height: 55px;
+    margin: 20px auto; /* Centraliza a barra de navegação na tela */
+    background-color: #9670B3;
+    color: white;
+}
+
+.navbar-2 .submenu h1{
+    font-size: 200px;
+}
+
+/* Style for main */
+main{
+    margin-top: 60px;
+}
+
+main .banner{
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #C2ACD3;
+    height: 100hv;
+}
+
+main .banner img{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+main .highlight {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+main .highlight h2 {
+    font-weight: bold;
+}
+
+
+
+main .highlight .highlight-product {
+    transition: transform 300ms ease-in-out;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 25%; /* Ajuste a largura desejada para cada destaque, por exemplo, 30% */
+    box-sizing: border-box; /* Inclui a borda e o preenchimento no cálculo total da largura */
+}
+
+main .highlight .highlight-product:hover{
+    transform: scale(1.1);
+}
+
+main .highlight .highlight-product img {
+    display: block;
+    width: 100%;
+    height: auto; /* Permite que a altura da imagem ajuste automaticamente para manter a proporção */
+    object-fit: cover;
+}
+
+
+main .about{
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+main .about h2{
+    font-weight: bold;
+}
+
+main .about p{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+main .gallery{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+main .gallery .product-img{
+    background-color: #D9D9D9;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 250px;
+}
+
+main .gallery h2{
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+main .gallery {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+main .gallery .product-img:hover{
+    transform: scale(1.1);
+}
+
+
+main .gallery .product-img {
+    transition: transform 300ms ease-in-out;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 25%; /* Ajuste a largura desejada para cada destaque, por exemplo, 30% */
+    box-sizing: border-box; /* Inclui a borda e o preenchimento no cálculo total da largura */
+}
+
+main .gallery .product-img img {
+    display: block;
+    width: 100%;
+    height: auto; /* Permite que a altura da imagem ajuste automaticamente para manter a proporção */
+    object-fit: cover;
+}
+
+/* Estilo para o ícone do WhatsApp */
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.whatsapp-icon a {
+    display: block;
+    background-color: #25D366; /* Cor de fundo do botão do WhatsApp */
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 300ms ease-in-out;
+}
+
+.whatsapp-icon a:hover {
+    background-color: #128C7E; /* Cor de fundo ao passar o mouse sobre o botão do WhatsApp */
+}
+
+.whatsapp-icon img {
+    width: 30px; /* Ajuste a largura desejada para o ícone do WhatsApp */
+    height: auto;
+}
+
+/* Style for footer*/
+
+footer {
+    text-align: center;
+    background: #9670B3;
+    color: white;
+    font-weight: bold;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.footer-wrapper {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p{
+    line-height: 0.5;
+}

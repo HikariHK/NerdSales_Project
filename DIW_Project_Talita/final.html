@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Talita">
+    <title>DIW Project</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/figure_page/css/style.css">
+    <link rel="icon" href="/imgs/fav.png">
+</head>
+<body>
+    <script type="text/javascript" src="/js/script.js"></script>
+    <header> <!-- Não mexer nesta seção, apenas adicionar os links -->
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/index.html"><img src="/imgs/DIW.png" alt="Logo"></a>
+            </div>
+            <div class="nav-center">
+                <form id="search" onsubmit="return srch(this.id)" autocomplete="off">
+                    <input type="search" name="search" placeholder="Pesquisar..." required="">
+                    <button type="submit"><span class="material-symbols-outlined" style="color: #ffffff;">search</span></button>
+                </form>
+            </div>
+            <div class="nav-right">
+                <a href="/DIW_Project_Isabel/DIW_Project_SAC_bel/"><span class="material-symbols-outlined">contact_support</span></a>
+                <a href="/DIW_Project_Isabel/DIW_Project_pgproduto_bel/index.html"><span class="material-symbols-outlined">shopping_cart</span></a>
+                <a href="/DIW_Project_Isabel/DIW_Project_formulario_bel/index.html"><span class="material-symbols-outlined">account_circle</span></a>
+                <a href="#"><span class="material-symbols-outlined" onclick="toggleSubMenu()">menu</span></a>
+                <div class="submenu" id="submenu">
+                    <a href="/DIW_Project_Manu/index.html">Livros</a>
+                    <a href="/DIW_Project_Talita/final.html">Bonecos</a>
+                    <a href="/DIW_Project_Talita/final.html">Roupas</a>
+                    <a href="/figure_page/index.html">Action Figures</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+<body>
+    <aside>
+        <div>
+            <h1>Filtrar Por</h1>
+            <div class="filtro">
+                <h2>Categorias</h2>
+                <div class="list_categoria">
+                    <ul>
+                        <li>One Piece</li>
+                        <li>Berserk</li>
+                        <li>Saint Seiya</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="preco">
+            <h3>Preço</h3>
+            <form class="form_precos">
+                <div class="min_preco">
+                    <label for="min">De:</label>
+                    <input type="number" id="min" name="min" placeholder="Min" class="min">
+                </div>
+                <div class="max_preco">
+                    <label for="max">Até:</label>
+                    <input type="number" id="max" name="max" placeholder="Máx" class="max">
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <div id="genero">
+                <h3>Genero</h3>
+                <div id="box">
+                    <input type="checkbox" id="caixa">
+                    <label for="caixa">Terror</label>
+                </div>
+
+                <div id="box">
+                    <input type="checkbox" id="caixa">
+                    <label for="caixa">Romance</label>
+                </div>
+
+                <div id="box">
+                    <input type="checkbox" id="caixa">
+                    <label for="caixa">Ação</label>
+                </div>
+            </div>
+
+            <div>
+                <div id="tipes">
+                    <h3>Tipos</h3>
+                    <div id="box">
+                        <input type="checkbox" id="caixa">
+                        <label for="caixa">Mangás</label>
+                    </div>
+                    <div id="box">
+                        <input type="checkbox" id="caixa">
+                        <label for="caixa">HQs</label>
+                    </div>
+                </div>
+            </div>
+    </aside>
+
+    <aside class="imagens">
+
+        <div id="fotos">
+
+            <div id="">
+                <figure class="produtos">
+                    <img src="imagens/babyYoda.png" alt="babyYoda" width="200">
+                    <a href="produtotalita.html"><figcaption>Boneco Baby Yoda</figcaption></a>
+                    <figcaption> R$ </figcaption>
+            </div>
+
+
+            <figure class="produtos">
+                <img src="imagens/guts.png" alt="Berserk" width="200">
+                <figcaption>Boneco colecionavel Berserk</figcaption>
+                <figcaption> R$ </figcaption>
+            </figure>
+
+            <figure class="produtos">
+                <img src="imagens/YodaNatal.png" alt="Baby Yoda" width="200">
+                <figcaption>Boneco Yoda presente natal</figcaption>
+                <figcaption> R$ </figcaption>
+            </figure>
+
+            <div class="produtos2">
+                <img src="imagens/breakingBad.png" alt="BreakingBad" width="150">
+                <figcaption>Camiseta BreakingBad</figcaption>
+                <figcaption> R$ </figcaption>
+            </div>
+
+            <div class="produtos2">
+                <img src="imagens/TLOUS.png" alt="The last of Us" width="200">
+                <figcaption>Camiseta The Last of Us</figcaption>
+                <figcaption> R$ </figcaption>
+            </div>
+
+            <figure class="produtos2">
+                <img src="imagens/friends.png" alt="Friends" width="200">
+                <figcaption>Camiseta Friends</figcaption>
+                <figcaption> R$ </figcaption>
+            </figure>
+        </div>
+    </aside>
+    <footer> <!-- Não mexer nesta seção -->
+        <div class="footer-wrapper">
+            <div class="footer-left">
+                <p>DIW Project © 2023.</p>
+            </div>
+            <div class="footer-center">
+                <p>Todos os direitos reservados.</p>
+            </div>
+            <div class="footer-right">
+                <p>Lorem ipsum, 210 Lorem</p>
+                <p>(32) 45621-45624</p>
+                <p>lorem.ipsum@diw.com.br</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+    <!-- Header e footer feito por Isabelle -->
+    <!-- Main feito por Talita -->

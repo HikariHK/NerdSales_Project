@@ -1,0 +1,361 @@
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ddd;
+}
+
+header {
+  background-color: #9670B3;
+  padding: 10px; /* Espaçamento interno */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #9670B3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 4px 5.2px 0px rgba(0, 0, 0, 0.58);
+}
+
+
+/* Style for nav-left */
+
+.nav-left{
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+
+.nav-left .roll a{
+  font-weight: bold;
+  padding: 8px;
+  background-color: #5C4681;
+  color: white;
+  margin: 1px;
+  font-size: 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+
+.nav-left img {
+  width: 123.75px;
+  height: auto; /* Altura da logo */
+}
+
+/* Transition for nav-left */
+
+.nav-left .roll a:hover{
+  background-color: white;
+  color: #5C4681;
+}
+
+/* Style for nav-center */
+
+.nav-center {
+  flex-grow: 1; /* Ocupa o espaço disponível */
+  margin: 0 20px; /* Espaçamento entre a logo e a barra de pesquisa */
+}
+
+.navbar .nav-center form {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .nav-center form input {
+  width: 100%; /* Preenche todo o espaço disponível */
+  padding: 5px; /* Espaçamento interno */
+  border: 1px solid #ddd; /* Borda */
+  border-radius: 5px 0px 0px 5px; /* Cantos arredondados */
+  font-size: 20px;
+}
+
+.navbar .nav-center form input:focus{
+  outline: none;
+}
+
+.navbar .nav-center form button {
+  background-color: #5C4681; /* Cor de fundo do botão de pesquisa */
+  color: white; /* Cor do texto do botão de pesquisa */
+  border: none; /* Remove a borda do botão */
+  border-radius: 0px 5px 5px 0px; /* Cantos arredondados do botão */
+  cursor: pointer;
+}
+
+.navbar .nav-center form span{
+  font-size: 29.2px;
+}
+
+/* Style for nav-right */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.nav-right a {
+  margin-left: 15px; /* Espaçamento entre os ícones */
+}
+
+.nav-right span{
+  height: 100%; /* Altura dos ícones */
+  width: 100%;
+  font-size: 35px;
+  margin: 10px;
+  color: #FFFFFF;
+  transition: color 300ms ease-in-out;
+}
+
+/* Transition for nav-right */
+
+.nav-right span:hover{
+  color: #dfdfdf;
+}
+
+
+/* Style for submenu inside menu button */
+.submenu {
+  z-index: 999;
+  width: 100%;
+  display: none;
+  position: absolute;
+  top: 76px;
+  right: 0;
+  background-color: #9670B3;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: display 300ms ease-in-out; /* Adiciona a transição para o display */
+}
+
+.submenu a {
+  margin: 0;
+  display: inline-block;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.submenu a:hover {
+  background-color: white;
+  color: #5C4681;
+}
+
+.navbar-2 {
+  z-index: 2;
+  width: 100%; /* Largura máxima da barra de navegação */
+  height: 55px;
+  margin: 20px auto; /* Centraliza a barra de navegação na tela */
+  background-color: #9670B3;
+  color: white;
+}
+
+.navbar-2 .submenu h1{
+  font-size: 200px;
+}
+
+
+
+#main-content {
+  padding: 90px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start
+  ;
+}
+
+.filtrar_por {
+  width: 25%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: flex-start;
+}
+
+.filtro {
+  width: 75%;
+  border: solid 3px #9670b3;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+  background-color: rgb(233, 232, 232);
+}
+
+.filtrar_por > h1,
+.filtro > h2 {
+  padding-left: 10px;
+  font-size: 120%;
+}
+
+.link_categoria,
+.link_produto,
+ul,
+li {
+  list-style: none;
+  padding-left: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.form_genero {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: start;
+  justify-content: start;
+  padding: 0px 0px 10px 10px;
+}
+
+.form_tipos {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: start;
+  justify-content: center;
+  padding: 0px 0px 10px 10px;
+}
+
+.min_preco,
+.max_preco {
+  float: left;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: start;
+  align-content: star;
+  width: 40%;
+  margin: 0px 0px 20px 10px;
+}
+
+.min_preco > .min,
+.max_preco > .max {
+  margin-top: 5px;
+  width: 95%;
+  border: 2px solid #9670b3;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.produtos {
+  /* parte onde vsai ficar as figuras*/
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center ;
+  width: 60%;
+}
+.produto{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center ;
+}
+
+.flex-item {
+  border: 3px solid #9670b3;
+  border-radius: 10px;
+  width: 20%;
+  margin-right: 85px;
+  margin-top: 50px;
+  transition: transform 0.5s;
+}
+.flex-item:hover {
+  transform: scale(1.2);
+  box-shadow: 10px 10px 30px #a18bb3;
+}
+
+.rolagem {
+  display: flex;
+  flex-flow: nowrap ;
+  justify-content: center;
+}
+
+.link_rolagem {
+  padding: 5px 20px 5px 20px;
+}
+
+.link_rolagem > a {
+    text-decoration: none;
+}
+
+img {
+  width: 50%;
+}
+
+.imagem {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding-top: 5px;
+}
+
+.text {
+  border-top: solid #9670b3 0.1px;
+  box-sizing: border-box;
+  position: relative;
+  font-size: 10px;
+  text-align: center;
+  z-index: 2;
+}
+
+.text > h2 {
+  color: black;
+  font-size: 125%;
+  text-align: center;
+}
+
+.text > p {
+  font-weight: bold;
+  color: #5c4681;
+  font-size: 130%;
+  text-align: center;
+}
+
+
+/* Style for footer*/
+
+footer {
+  text-align: center;
+  background: #9670B3;
+  color: white;
+  font-weight: bold;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.footer-wrapper {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-center {
+  text-align: center;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-right p{
+  line-height: 0.5;
+}
