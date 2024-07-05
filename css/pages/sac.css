@@ -1,0 +1,124 @@
+/* CSS Bel */
+
+.section1 {
+    background-color: #F1EAF5;
+    padding: 10px;
+    justify-content: center;
+}
+
+.titulosac {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    margin-bottom: 2px;
+    margin-left: 30px;
+}
+
+.subtitulosac {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    color: #9670B3;
+    margin-top: 1px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.dadoscontato {
+    display: flex;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    margin-left: 120px;
+}
+
+.endereco {
+    background-color: #5C4681;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.email {
+    background-color: #5C4681;
+    margin-left: 190px;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.telefone {
+    background-color: #5C4681;
+    margin-left: 200px;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.texto {
+    color: white;
+}
+
+.endereco:hover {
+    background-color: #9670B3;
+}
+
+.email:hover {
+    background-color: #9670B3;
+}
+
+.telefone:hover {
+    background-color: #9670B3;
+}
+
+.tituloduvidas {
+    margin-left: 80px;
+}
+
+.respostaduvidas {
+    margin-left: 80px;
+}
+
+.accordion {
+    margin-bottom: 20px;
+    margin-left: 80px;
+    padding-right: 80px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+input[type="checkbox"]:checked + label + .content {
+    display: block;
+}
+
+.boxduvidas {
+    padding-bottom: 50px;
+}
+
+/* Estilo para manter o header fixo e ajustar o conteúdo principal */
+
+header {
+    position: fixed; /* Mantém o header fixo no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px; /* Ajuste conforme necessário */
+    z-index: 1000; /* Garante que o header fique acima do conteúdo */
+    background-color: #fff; /* Cor de fundo do header */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra para destacar o header */
+}
+

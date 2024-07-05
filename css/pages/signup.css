@@ -1,0 +1,94 @@
+
+main{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    padding: 5% 0% 5% 0%;
+}
+
+main h2{
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.page {
+
+    text-align: center;
+    background-color: #C97233; /* Cor de fundo para o formulário */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0% 34% 0% 34%;
+}
+
+.formLogin {
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 40px;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.formLogin h2 {
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-size: 30px;
+    color: #933B0A; /* Cor para o título do formulário */
+}
+
+.formLogin p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.formLogin label {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formLogin input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    transition: all linear 160ms;
+    outline: none;
+}
+
+.formLogin input[type="submit"] {
+    background-color: #933B0A; /* Cor do botão */
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none !important;
+    transition: all linear 160ms;
+    cursor: pointer;
+}
+
+.formLogin input[type="submit"]:hover {
+    transform: scale(1.05);
+    background-color: #C97233; /* Cor do botão ao passar o mouse */
+}
+
+.formLogin a {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #555;
+    transition: all linear 160ms;
+    text-align: right;
+}
+
+.formLogin a:hover {
+    color: #933B0A; /* Cor do link ao passar o mouse */
+}

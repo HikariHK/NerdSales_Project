@@ -1,0 +1,50 @@
+/* Estilo para o ícone do WhatsApp */
+.whatsapp-icon {
+    position: fixed;
+    bottom: 10px;
+    right: 20px; /* Alinhar à direita */
+    margin: 0;
+}
+
+.whatsapp-icon a {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+}
+
+.whatsapp-icon img {
+    margin: 0;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-icon img:hover {
+    opacity: 1;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 70px; /* Ajustar a posição acima do ícone do WhatsApp */
+    right: 20px; /* Alinhar à direita */
+    background-color: #933B0A;
+    color: white;
+    width: 50px;
+    height: 50px; /* Ajustar altura para manter proporção */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #ec7a3d;
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+}

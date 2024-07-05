@@ -1,0 +1,40 @@
+/* Style for footer */
+
+footer {
+    display: flex;
+    justify-content: center;
+    background: #C97233;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 15px; /* Ajuste no padding para dar mais espaço vertical */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.footer-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px; /* Espaçamento entre os elementos */
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p {
+    line-height: 1.5; /* Ajuste no line-height para melhorar a legibilidade */
+}

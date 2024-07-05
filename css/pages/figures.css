@@ -1,0 +1,167 @@
+/* Style for main */
+main{
+    text-align: center;
+    display: flex;
+}
+
+
+main aside{
+    padding: 5px;
+    flex-direction: column;
+    text-align: left;
+    margin-top: 70px;
+    margin: 30px;
+    background-color: #FFFFFF;
+}
+
+main aside h3{
+    padding-left: 6px;
+    font-size: 130%;
+}
+
+main aside .price, .genre, .types{
+    padding-left: 12px;
+}
+
+main aside .sidebar-content{
+    margin: 5px;
+    margin-bottom: 20px;
+    border: 2px solid #6E2DA0;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+main aside .sidebar-content ul{
+    padding-left: 0px;
+    list-style: none;
+}
+
+main aside .sidebar-content ul li{
+    font-weight: 600;
+    padding-left: 8px;
+    font-size: 110%;
+}
+
+main aside .sidebar-content ul li a{
+    text-decoration: none;
+    color: #000;
+    transition: color 200ms ease-in-out;
+}
+
+main aside .sidebar-content ul li a:hover{
+    color: #6E2DA0;
+}
+
+.price {
+    display: flex;
+}
+
+.price label {
+    margin-right: 10px;
+}
+
+.price input {
+    padding: 5px;
+    width: 110px; /* Ajuste conforme necessário */
+    border-radius: 10px;
+    border: 2px solid hsla(0, 0%, 0%, 0.463);
+}
+
+.price input:focus{
+    outline: none;
+}
+
+
+main aside .sidebar-content .genre label,
+main aside .sidebar-content .types label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 110%;
+    font-weight: 600;
+}
+
+main aside .sidebar-content .genre input[type="checkbox"],
+main aside .sidebar-content .types input[type="checkbox"] {
+    transform: scale(1.5); /* Ajuste o valor conforme necessário */
+    margin-right: 10px; /* Adiciona um espaçamento entre a checkbox e o texto da label */
+}
+
+main .product-boxes {
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap; /* Permite que as divs quebrem para a próxima linha conforme necessário */
+    justify-content: space-around; /* Distribui as divs uniformemente na linha */
+    padding: 5px;
+    text-align: center;
+    margin-top: 70px;
+    margin: 30px;
+}
+
+
+main .product-boxes .product-box {
+    box-sizing: border-box; /* Adicione esta linha */
+    border: 2px solid #6E2DA0;
+    display: inline-block;
+    width: 28%;
+    margin: 20px;
+    border-radius: 20px 20px 20px 20px;
+    padding: 0px;
+    align-items: center;
+    transition: transform 300ms ease-in-out;
+}
+
+main .product-boxes .product-box:hover{
+    transform: scale(1.040);
+}
+
+.product-img {
+    border-radius: 20px 20px 0px 0px;
+}
+
+.product-img a{
+    text-decoration: none;
+}
+
+.product-img img {
+    border-radius: 17px 17px 0px 0px;
+    object-fit: cover;
+    width: 100%;
+    display: block;
+    border-bottom: 3px solid #6E2DA0;
+}
+
+main .product-boxes .product-box .product-text {
+    margin-top: 10px; /* Adicione o valor desejado para a margem no topo */
+    border-radius: 0px 0px 20px 20px;
+    display: inline-block;
+    padding: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    bottom: 0;
+    text-align: center;
+    align-items: center;
+}
+
+.product-text p{
+    padding-top: 5px;
+    font-family: 'Quicksand';
+    font-weight: 700;
+    color: #6E2DA0;
+}
+
+.product-text a{
+    font-weight: 600;
+    font-size: 115%;
+    color: #000;
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+}
+
+.product-text a:hover{
+    color: #6E2DA0;
+}
+
+h2 {
+    font-size: 110%;
+    margin-top: 10px;
+}

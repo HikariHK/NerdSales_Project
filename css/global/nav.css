@@ -1,0 +1,175 @@
+header {
+    background-color: #C97233;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #C97233;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 4px 5.2px 0px rgba(0, 0, 0, 0.58);
+}
+
+
+/* Style for nav-left */
+
+
+
+.nav-left{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+
+
+.nav-left img {
+    height: 55px; /* Altura da logo */
+}
+
+.nav-left .roll{
+    margin-left: 20px;
+}
+
+.nav-left .roll a{
+    font-weight: 600;
+    padding: 8px;
+    background-color: #933B0A;
+    color: white;
+    margin: 1px;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+
+.nav-left img {
+    width: 80px;
+    height: auto; /* Altura da logo */
+}
+
+/* Transition for nav-left */
+
+.nav-left .roll a:hover{
+    background-color: white;
+    color: #5C4681;
+}
+
+/* Style for nav-center */
+
+.nav-center {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    margin: 0 20px; /* Espaçamento entre a logo e a barra de pesquisa */
+}
+
+.navbar .nav-center form {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav-center form input {
+    width: 100%; /* Preenche todo o espaço disponível */
+    padding: 10px; /* Espaçamento interno ajustado */
+    border: 1px solid #ddd; /* Borda */
+    border-radius: 5px 0px 0px 5px; /* Cantos arredondados */
+    font-size: 20px;
+    box-sizing: border-box; /* Inclui o padding na altura e largura totais */
+    height: 40px; /* Altura definida para o input */
+}
+
+.navbar .nav-center form input:focus {
+    outline: none;
+}
+
+.navbar .nav-center form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px; /* Espaçamento interno ajustado */
+    border: 1px solid #933B0A;
+    background-color: #933B0A; /* Cor de fundo do botão de pesquisa */
+    color: white; /* Cor do texto do botão de pesquisa */
+    border-radius: 0px 5px 5px 0px; /* Cantos arredondados do botão */
+    cursor: pointer;
+    height: 40px; /* Altura definida para o botão */
+    box-sizing: border-box; /* Inclui o padding na altura e largura totais */
+}
+
+.navbar .nav-center form span {
+    font-size: 29.2px;
+}
+
+
+/* Style for nav-right */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0px 20px 0px 20px;
+}
+
+.nav-right a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+.nav-right span {
+    height: 100%; /* Altura dos ícones */
+    width: 100%;
+    font-size: 35px;
+    margin: 10px;
+    color: #FFFFFF;
+    transition: color 300ms ease-in-out;
+}
+
+.nav-right span:hover {
+    color: #dfdfdf;
+}
+
+/* Estilo para o submenu */
+.submenu {
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    top: 76px;
+    right: 0;
+    background-color: #C97233;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 300ms ease-in-out; /* Adiciona a transição para a posição do submenu */
+    display: none; /* Oculta o submenu */
+    flex-direction: row; /* Ajusta a direção para horizontal */
+    align-items: center;
+    justify-content: center;
+}
+
+.submenu a {
+    margin: 0;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+    display: block;
+}
+
+.submenu a:hover {
+    background-color: white;
+    color: #933B0A;
+}
+
+.menu-toggle:focus + .submenu {
+    display: flex;
+}
+

@@ -1,0 +1,124 @@
+
+
+/* Specific styles for home */
+
+main .banner {
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #C2ACD3;
+}
+
+main .banner img {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+}
+
+main .highlight {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+main .highlight h2 {
+    font-weight: bold;
+}
+
+main .highlight .highlight-product {
+    transition: transform 300ms ease-in-out;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 25%; /* Ajuste a largura desejada para cada destaque, por exemplo, 30% */
+    box-sizing: border-box; /* Inclui a borda e o preenchimento no cálculo total da largura */
+}
+
+main .highlight .highlight-product:hover {
+    transform: scale(1.1);
+}
+
+main .highlight .highlight-product img {
+    display: block;
+    width: 100%;
+    height: auto; /* Permite que a altura da imagem ajuste automaticamente para manter a proporção */
+    object-fit: cover;
+}
+
+main .about {
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+main .about h2 {
+    font-weight: bold;
+}
+
+main .about p {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+main .gallery {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+main .gallery .product-img {
+    background-color: #D9D9D9;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 250px;
+}
+
+main .gallery h2 {
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+main .gallery .product-img:hover {
+    transform: scale(1.1);
+}
+
+main .gallery .product-img {
+    transition: transform 300ms ease-in-out;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 25%; /* Ajuste a largura desejada para cada destaque, por exemplo, 30% */
+    box-sizing: border-box; /* Inclui a borda e o preenchimento no cálculo total da largura */
+}
+
+main .gallery .product-img img {
+    display: block;
+    width: 100%;
+    height: auto; /* Permite que a altura da imagem ajuste automaticamente para manter a proporção */
+    object-fit: cover;
+}
