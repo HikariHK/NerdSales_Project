@@ -17,13 +17,13 @@
     <header>
         <nav class="navbar">
             <div class="nav-left">
-                <?php require '..\nav-left2.php';?>
+                <?php require '..\layout\nav-left2.php';?>
             </div>
             <div class="nav-center">
-                <?php require '..\nav-center.php';?>
+                <?php require '..\layout\nav-center.php';?>
             </div>
             <div class="nav-right">
-                <?php require '..\nav-right.php';?>
+                <?php require '..\layout\nav-right.php';?>
             </div>
         </nav>
     </header>

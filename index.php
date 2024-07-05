@@ -27,7 +27,7 @@
         </nav>
     </header>
     <main id="main-content">
-        <?php require 'layout/pages/home.php';?>
+        <?php require 'pages/home.php';?>
     </main>
     <div class="whatsapp-icon">
         <?php include 'layout/buttons.php';?>
