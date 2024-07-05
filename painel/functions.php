@@ -53,14 +53,14 @@ function inserirUsuarios($connect){
 		if ($_POST['senha'] != $_POST['repetesenha']) {
 			$erro[] = "Senhas não conferem!";
 		}
-		$queryEmail = "SELECT email  FROM usuarios WHERE email = '$email'";
+		$queryEmail = "SELECT email  FROM users WHERE email = '$email'";
 		$buscaEmail = mysqli_query($connect, $queryEmail);
 		$verifica = mysqli_num_rows($buscaEmail);
 		if (!empty($verifica)) {
 			$erros[] = "E-mail já cadastrado!";
 		}
 		if (empty($erros)) {
-			$query = "INSERT INTO usuarios (nome, email, senha, data_cadastro) VALUES ('$nome', '$email', '$senha', NOW())";
+			$query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$nome', '$email', '$senha', NOW())";
 			$executar = mysqli_query($connect, $query);
 			if ($executar) {
 				echo "Usuário inserido com sucesso!";

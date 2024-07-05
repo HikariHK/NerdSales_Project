@@ -22,9 +22,9 @@ require_once "functions.php"; ?>
 		</div>
 	</nav>
 	<?php
-	$tabela = "usuarios";
+	$tabela = "users";
 	$order = "nome";
-	$usuarios = buscar($connect, $tabela, 1, $order);
+	$users = buscar($connect, $tabela, 1, $order);
 	inserirUsuarios($connect);
 	if (isset($_GET['id'])) { ?>
 	 	<h2>Tem certeza de que deseja deletar o usuário <?php echo $_GET['nome']; ?></h2>;
@@ -36,11 +36,10 @@ require_once "functions.php"; ?>
 	 <?
 	 if (isset($_POST['deletar']) ) {
 	 	if ($_SESSION['id'] != $_POST['id']) {
-	 		deletar($connect, "usuarios", $_POST['id']);
+	 		deletar($connect, "users", $_POST['id']);
 	 	}else{
-	 		echo "Você não pode alterar seu próprio usuário"
+	 		echo "Você não pode alterar seu próprio usuário";
 	 	}
-	 	
 	 }
 	 
 
@@ -69,28 +68,28 @@ require_once "functions.php"; ?>
 			</thead>
 			<tbody>
 				<?php
-					foreach ($usuarios as $usuario) : ?>
+					foreach ($users as $user) : ?>
 						<tr>
 							<td><?php
-							 echo $usuario['id'];?>
+							 echo $user['id'];?>
 							 	
 							 </td>
 							 <td><?php
-							 echo $usuario['nome'];?>
+							 echo $user['nome'];?>
 							 	
 							 </td>
 							 <td><?php
-							 echo $usuario['email'];?>
+							 echo $user['email'];?>
 							 	
 							 </td>
 							 <td><?php
-							 echo $usuario['data_cadastro'];?>
+							 echo $user['data_cadastro'];?>
 							 	
 							 </td>
 							 <td>
 							 	<a href="users.php?id=<?php
-							 echo $usuario['id'];?>&nome=<?php
-							 echo $usuario['nome'];?>">Excluir</a>
+							 echo $user['id'];?>&nome=<?php
+							 echo $user['nome'];?>">Excluir</a>
 							 </td>
 						</tr>
 					<?php endforeach;

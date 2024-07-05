@@ -16,7 +16,7 @@ $seguranca = isset($_SESSION['ativa']) ? TRUE : header("location:login.php"); ?>
 		<div>
 			<a href="index.php">Painel</a>
 			<a href="users.php">Gerenciar Usuários</a>
-			<a href="logout.php">Sair</a>
+			<a href="../pages/signin.php">Sair</a>
 		</div>
 	</nav>
 <?php };
