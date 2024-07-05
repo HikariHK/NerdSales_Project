@@ -1,3 +1,6 @@
+<?php require_once "C:/xampp/htdocs/projeto/painel/functions.php";
+if (isset($_POST['cadastrar'])) {
+        login($connect);} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,24 +33,23 @@
     <main>
         <h2>Registro</h2>
         <div class="page">
-            <form method="POST" class="formLogin">
+            <form action="" method="post">
                 <h2>Crie uma conta nova</h2>
                 <p>Complete seus dados para cadastro.</p>
                 
                 <label for="name">Nome</label>
-                <input type="text" name="name" placeholder="Digite seu nome" autofocus />
+                <input type="text" name="nome" placeholder="Nome">
                 
                 <label for="email">E-mail</label>
-                <input type="email" name="email" placeholder="Digite seu e-mail" />
+                <input type="email" name="email" placeholder="E-mail">
 
                 <label for="password">Senha</label>
-                <input type="password" name="password" placeholder="Digite sua senha" />
-
-                <label for="birthdate">Data de Nascimento</label>
-                <input type="date" name="birthdate" />
-
+                <input type="password" name="senha" placeholder="Senha">
+                <label for="password">Repita a senha</label>
+                <input type="password" name="repetesenha" placeholder="Confirme sua senha">
                 <a href="../pages/signin.php">Já possuo uma conta</a>
-                <input type="submit" value="Registrar" />
+                <input type="submit" name="cadastrar" value="Cadastrar">
+ 
             </form>
         </div>
     </main>

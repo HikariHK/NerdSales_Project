@@ -1,3 +1,6 @@
+<?php require_once "C:/xampp/htdocs/projeto/painel/functions.php";
+if (isset($_POST['acessar'])) {
+        login($connect);} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
