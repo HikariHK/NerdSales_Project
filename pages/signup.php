@@ -1,6 +1,6 @@
-<?php require_once "C:/xampp/htdocs/projeto/painel/functions.php";
+<?php require_once "../painel/functions.php";
 if (isset($_POST['cadastrar'])) {
-        login($connect);} ?>
+        inserirUsuarios($connect);} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

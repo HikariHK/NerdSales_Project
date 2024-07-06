@@ -27,7 +27,7 @@ function logout(){
 	session_start();
 	session_unset();
 	session_destroy();
-	header("location: login.php");
+	header("location: ../pages/signin.php");
 }
 function buscaUnica($connect, $tabela, $id){
 	$query = "SELECT * FROM $tabela WHERE id =".(int) $id;
@@ -51,7 +51,7 @@ function inserirUsuarios($connect){
 		$nome = mysqli_real_escape_string($connect, $_POST['nome']);
 		$senha = sha1($_POST['senha']);
 		if ($_POST['senha'] != $_POST['repetesenha']) {
-			$erro[] = "Senhas não conferem!";
+			$erros[] = "Senhas não conferem!";
 		}
 		$queryEmail = "SELECT email  FROM users WHERE email = '$email'";
 		$buscaEmail = mysqli_query($connect, $queryEmail);
