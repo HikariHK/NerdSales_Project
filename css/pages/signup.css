@@ -10,6 +10,7 @@ main{
 }
 
 main h2{
+    margin-top: 0;
     text-transform: uppercase;
     margin-bottom: 20px;
 }

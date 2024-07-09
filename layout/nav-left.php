@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="/projeto/css/global/nav.css">
-<a href="/projeto/index.php"><img src="/projeto/assets/imgs/DIW.png" alt="Logo"></a>
+<?php require_once __DIR__ . "/../painel/functions.php"; ?>
+<link rel="stylesheet" href="<?php echo url('css/global/nav.css'); ?>">
+<a href="index.php"><img src="<?php echo url('assets/imgs/DIW.png'); ?>" alt="Logo"></a>
 <div class="roll">
     <a href="#banner">Ofertas</a>
     <a href="#highlight">Destaque</a>

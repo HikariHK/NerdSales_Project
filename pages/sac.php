@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../painel/functions.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/projeto/css/global/style.css">
-    <link rel="stylesheet" href="/projeto/css/pages/sac.css">
-    <link rel="icon" href="imgs/fav.png">
+    <link rel="stylesheet" href="<?php echo url('css/global/style.css'); ?>">
+    <link rel="stylesheet" href="<?php echo url('css/pages/sac.css'); ?>">
+    <link rel="icon" href="<?php echo url('assets/imgs/fav.png'); ?>">
     <title>NerdSales</title>
 </head>
 <body>
@@ -31,31 +32,6 @@
         <section class="section1">
             <h1 class="titulosac">SAC</h1>
             <h4 class="subtitulosac">tire suas dúvidas</h4>
-        </section>
-        <section>
-            <div class="paginacontato">
-                <div class="dadoscontato">
-                    <div class="endereco">
-                        <h5 class="texto">Nosso Endereço</h5>
-                        <a class="texto" href="https://maps.app.goo.gl/QhnvC6o5B4Y9VYxA6">Av. Jeronimo de Ornelas, 420
-                            <br>Santana - Porto Alegre</br>
-                            <br>CEP - 90800-041</br>
-                        </a>
-                        <p class="texto"></p>
-                        <p class="texto"></p>
-                    </div>
-                
-                    <div class="email">
-                        <h5 class="texto">E-mail</h5>
-                        <a class="texto" href="mailto:ajudadiw@gmail.com?subject=&body=">ajudadiw@gmail.com</a>
-                    </div>
-
-                    <div class="telefone">
-                        <h5 class="texto">Nosso Número</h5>
-                        <p class="texto">(32) 45621-45624</p>
-                        <a class="texto" href="https://wa.me/5532456214562">Nos chame no whatsapp!</a>
-                    </div>
-                </div>
         </section>
         <section>
             <div>
@@ -88,6 +64,32 @@
                     </div>
                 </div>
         </section>
+        <section>
+            <div class="paginacontato">
+                <div class="dadoscontato">
+                    <div class="endereco">
+                        <h5 class="texto">Nosso Endereço</h5>
+                        <a class="texto" href="https://maps.app.goo.gl/QhnvC6o5B4Y9VYxA6">Av. Jeronimo de Ornelas, 420
+                            <br>Santana - Porto Alegre</br>
+                            <br>CEP - 90800-041</br>
+                        </a>
+                        <p class="texto"></p>
+                        <p class="texto"></p>
+                    </div>
+                
+                    <div class="email">
+                        <h5 class="texto">E-mail</h5>
+                        <a class="texto" href="mailto:ajudadiw@gmail.com?subject=&body=">ajudadiw@gmail.com</a>
+                    </div>
+
+                    <div class="telefone">
+                        <h5 class="texto">Nosso Número</h5>
+                        <p class="texto">(32) 45621-45624</p>
+                        <a class="texto" href="https://wa.me/5532456214562">Nos chame no whatsapp!</a>
+                    </div>
+                </div>
+        </section>
+
     </main>
     <div class="whatsapp-icon">
         <?php include '..\layout\buttons.php';?>

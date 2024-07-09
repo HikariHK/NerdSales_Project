@@ -1,9 +1,12 @@
 /* Style for main */
+
 main{
     text-align: center;
     display: flex;
+    margin-top: 67px;
 }
 
+/* style for aside */
 
 main aside{
     padding: 5px;
@@ -100,22 +103,16 @@ main .product-boxes {
 
 main .product-boxes .product-box {
     box-sizing: border-box; /* Adicione esta linha */
-    border: 2px solid #6E2DA0;
     display: inline-block;
     width: 28%;
     margin: 20px;
-    border-radius: 20px 20px 20px 20px;
     padding: 0px;
     align-items: center;
     transition: transform 300ms ease-in-out;
 }
 
-main .product-boxes .product-box:hover{
+main .product-boxes .product-box:hover {
     transform: scale(1.040);
-}
-
-.product-img {
-    border-radius: 20px 20px 0px 0px;
 }
 
 .product-img a{
@@ -123,15 +120,22 @@ main .product-boxes .product-box:hover{
 }
 
 .product-img img {
-    border-radius: 17px 17px 0px 0px;
+    box-sizing: border-box;
+    border-right: 3px solid #6E2DA0;
+    border-left: 3px solid #6E2DA0;
+    border-top: 3px solid #6E2DA0;
+    border-radius: 20px 20px 0px 0px;
     object-fit: cover;
+    height: 100%;
     width: 100%;
     display: block;
-    border-bottom: 3px solid #6E2DA0;
 }
 
 main .product-boxes .product-box .product-text {
-    margin-top: 10px; /* Adicione o valor desejado para a margem no topo */
+    box-sizing: border-box;
+    border-right: 3px solid #6E2DA0;
+    border-left: 3px solid #6E2DA0;
+    border-bottom: 3px solid #6E2DA0;
     border-radius: 0px 0px 20px 20px;
     display: inline-block;
     padding: 0px;
@@ -150,6 +154,7 @@ main .product-boxes .product-box .product-text {
 }
 
 .product-text a{
+    margin-top: 10px;
     font-weight: 600;
     font-size: 115%;
     color: #000;
@@ -157,9 +162,11 @@ main .product-boxes .product-box .product-text {
     transition: color 200ms ease-in-out;
 }
 
-.product-text a:hover{
-    color: #6E2DA0;
+.product-boxes .product-box .product-text a {
+    margin-top: 10px;
+    display: inline-block; /* Alterado para inline-block */
 }
+
 
 h2 {
     font-size: 110%;

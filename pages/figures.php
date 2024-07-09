@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../painel/functions.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/projeto/css/global/style.css">
-    <link rel="stylesheet" href="/projeto/css/pages/sac.css">
-    <link rel="icon" href="imgs/fav.png">
+    <link rel="stylesheet" href="<?php echo url('css/global/style.css'); ?>">
+    <link rel="stylesheet" href="<?php echo url('css/pages/figures.css'); ?>">
+    <link rel="icon" href="<?php echo url('assets/imgs/fav.png'); ?>">
     <title>NerdSales</title>
 </head>
 <body>
@@ -81,7 +82,7 @@
             <!-- Caixas de produtos -->
                 <div class="product-box">
                     <div class="product-img">
-                        <a href=""><img src="/projeto/assets/imgs/products/figures/elaina.jpg" alt=""></a>
+                        <a href=""><img src="../assets/imgs/products/figures/elaina.jpg" alt=""></a>
                     </div>
                     <div class="product-text">
                         <a href="">Elaina Summer One-piece Dress</a>
@@ -137,11 +138,11 @@
         </section>
     </main>
     <div class="whatsapp-icon">
-        <?php include '..\buttons.php';?>
+        <?php include '..\layout\buttons.php';?>
     </div>
     <footer>
         <div class="footer-wrapper">
-            <?php include '..\footer.php';?>
+            <?php include '..\layout\footer.php';?>
         </div>
     </footer>
 </body>

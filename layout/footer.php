@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/projeto/css/global/footer.css">
+<?php require_once __DIR__ . "/../painel/functions.php"; ?>
+<link rel="stylesheet" href="<?php echo url('css/global/footer.css'); ?>">
 <div class="footer-left">
     <p>NerdSales Project © 2024.</p>
 </div>

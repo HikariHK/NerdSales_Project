@@ -1,3 +1,4 @@
+<?php require_once "painel/functions.php";?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/projeto/css/global/style.css">
-    <link rel="icon" href="imgs/fav.png">
+    <link rel="stylesheet" href="<?php echo url('css/global/style.css'); ?>">
+    <link rel="icon" href="<?php echo url('assets/imgs/fav.png'); ?>">
     <title>NerdSales</title>
 </head>
 <body>

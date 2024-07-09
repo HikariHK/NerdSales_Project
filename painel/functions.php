@@ -86,3 +86,12 @@ function deletar($connect, $tabela, $id){
 	}
 	
 }
+
+
+$base_path = "/projeto/";
+
+// Função para construir URLs
+function url($path) {
+    global $base_path;
+    return $base_path . ltrim($path, '/');
+}

@@ -138,10 +138,10 @@ header {
 
 /* Estilo para o submenu */
 .submenu {
-    z-index: 999;
+    z-index: 998;
     position: absolute;
     width: 100%;
-    top: 76px;
+    top: 75px;
     right: 0;
     background-color: #C97233;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -156,7 +156,7 @@ header {
 .submenu a {
     margin: 0;
     padding: 20px;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -169,7 +169,4 @@ header {
     color: #933B0A;
 }
 
-.menu-toggle:focus + .submenu {
-    display: flex;
-}
 
