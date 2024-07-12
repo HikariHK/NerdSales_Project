@@ -25,6 +25,7 @@ main h2{
     margin: 0% 32% 0% 32%;
 }
 
+
 .formLogin {
     background-color: #fff;
     border-radius: 7px;
@@ -78,6 +79,23 @@ main h2{
 .formLogin input[type="submit"]:hover {
     transform: scale(1.05);
     background-color: #C97233; /* Cor do botão ao passar o mouse */
+}
+
+.formLogin input.error {
+    border-color: red;
+}
+
+.formLogin .warning{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.formLogin .mensagem-erro, .formLogin span{
+    color: red;
+    text-align: left;
+    margin: 0;
 }
 
 .formLogin a {

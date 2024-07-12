@@ -155,6 +155,7 @@ main .product-boxes .product-box .product-text {
 
 .product-text a{
     margin-top: 10px;
+    display: inline-block; /* Alterado para inline-block */
     font-weight: 600;
     font-size: 115%;
     color: #000;
@@ -162,9 +163,8 @@ main .product-boxes .product-box .product-text {
     transition: color 200ms ease-in-out;
 }
 
-.product-boxes .product-box .product-text a {
-    margin-top: 10px;
-    display: inline-block; /* Alterado para inline-block */
+.product-text a:hover { 
+    color: #6E2DA0;
 }
 
 

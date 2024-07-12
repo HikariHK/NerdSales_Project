@@ -1,6 +1,9 @@
 <?php require_once "../painel/functions.php";
 if (isset($_POST['acessar'])) {
-        login($connect);} ?>
+        login($connect);} 
+
+$mensagemErro = login($connect);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,10 +41,16 @@ if (isset($_POST['acessar'])) {
                 <p>É muito bom ver você de novo por aqui.</p>
                 
                 <label for="email">E-mail</label>
-                <input type="email" name="email" placeholder="Digite seu e-mail" />
+                <input type="email" name="email" placeholder="Digite seu e-mail" class="<?php echo !empty($mensagemErro) ? 'error' : ''; ?>" />
 
                 <label for="password">Senha</label>
-                <input type="password" name="senha" placeholder="Digite sua senha" />
+                <input type="password" name="senha" placeholder="Digite sua senha" class="<?php echo !empty($mensagemErro) ? 'error' : ''; ?>" />
+
+                <?php if (!empty($mensagemErro)): ?>
+                    <div class="warning">
+                        <span class="material-symbols-outlined">warning</span><p class="mensagem-erro"><?php echo $mensagemErro; ?></p>
+                    </div>
+                <?php endif; ?>
 
                 <a href="../pages/signup.php">Registrar-se</a>
                 <input type="submit" name="acessar" value="Entrar" />

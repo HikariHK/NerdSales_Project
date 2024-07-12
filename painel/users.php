@@ -1,50 +1,49 @@
-<?php session_start();
+<?php
+session_start();
 $seguranca = isset($_SESSION['ativa']) ? TRUE : header("location:login.php");
-require_once "functions.php"; ?>
+require_once "functions.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"
-	<title>Painel Admin - Usuários</title>
+    <meta charset="utf-8">
+    <title>Painel Admin - Usuários</title>
 </head>
 <body>
-	<?php if ($seguranca) { ?>
-		
+    <?php if ($seguranca) { ?>
+        <h1>Painel administrativo do site</h1>
+        <h3>Bem Vindo, <?php echo $_SESSION['nome']; ?></h3>
+        <h2>Gerenciador de Usuários</h2>
+        <nav>
+            <div>
+                <a href="index.php">Painel</a>
+                <a href="users.php">Gerenciar Usuários</a>
+                <a href="logout.php">Sair</a>
+            </div>
+        </nav>
+        <?php
+        $tabela = "users";
+        $order = "nome";
+        $users = buscar($connect, $tabela, 1, $order);
+        inserirUsuarios($connect);
+        if (isset($_GET['id']) && isset($_GET['nome'])) { ?>
+            <h2>Tem certeza de que deseja deletar o usuário <?php echo $_GET['nome']; ?>?</h2>
+            <form action="" method="post">
+                <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+                <input type="submit" name="deletar" value="Deletar">
+            </form>
+        <?php } ?>
 
-	<h1>Painel administrativo do site</h1>
-	<h3>Bem Vindo, <?php echo $_SESSION['nome']; ?></h3>
-	<h2>Gerenciador de Usuários</h2>
-	<nav>
-		<div>
-			<a href="index.php">Painel</a>
-			<a href="users.php">Gerenciar Usuários</a>
-			<a href="logout.php">Sair</a>
-		</div>
-	</nav>
-	<?php
-	$tabela = "users";
-	$order = "nome";
-	$users = buscar($connect, $tabela, 1, $order);
-	inserirUsuarios($connect);
-	if (isset($_GET['id'])) { ?>
-	 	<h2>Tem certeza de que deseja deletar o usuário <?php echo $_GET['nome']; ?></h2>;
-	 	<form action="" method="post">
-	 		<input type="hidden" name="id" value="<?php echo $_GET['nome'] ?>">
-	 		<input type="submit" name="deletar" value="Deletar">
-	 	</form>
-	 <?php } ?>
-	 <?
-	 if (isset($_POST['deletar']) ) {
-	 	if ($_SESSION['id'] != $_POST['id']) {
-	 		deletar($connect, "users", $_POST['id']);
-	 	}else{
-	 		echo "Você não pode alterar seu próprio usuário";
-	 	}
-	 }
-	 
-
-	?>
-	 } 
+        <?php
+        if (isset($_POST['deletar'])) {
+            if ($_SESSION['id'] != $_POST['id']) {
+                deletar($connect, "users", $_POST['id']);
+            } else {
+                echo "Você não pode alterar seu próprio usuário";
+            }
+        }
+        ?>
+    <?php  ?> 
 	<form action="" method="post">
 		<fieldset>
 			<legend>Inserir Usuários</legend>
