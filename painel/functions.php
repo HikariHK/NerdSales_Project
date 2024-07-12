@@ -33,27 +33,31 @@ function login($connect) {
     }
     return null;
 }
+
 function logout(){
-	session_start();
-	session_unset();
-	session_destroy();
-	header("location: ../pages/signin.php");
+    session_start();
+    session_unset();
+    session_destroy();
+    header("location: ../pages/signin.php");
 }
+
 function buscaUnica($connect, $tabela, $id){
-	$query = "SELECT * FROM $tabela WHERE id =".(int) $id;
-	$execute = mysqli_query($connect, $query);
-	$result = mysqli_fetch_assoc($execute);
-	return $result;
-}	
+    $query = "SELECT * FROM $tabela WHERE id =".(int) $id;
+    $execute = mysqli_query($connect, $query);
+    $result = mysqli_fetch_assoc($execute);
+    return $result;
+}   
+
 function buscar($connect, $tabela, $where = 1, $order = ""){
-	if (!empty($order)){
-		$order = "ORDER BY $order";
-	};
-	$query = "SELECT * FROM $tabela WHERE $where $order";
-	$execute = mysqli_query($connect, $query);
-	$results = mysqli_fetch_all($execute, MYSQLI_ASSOC);
-	return $results;
+    if (!empty($order)){
+        $order = "ORDER BY $order";
+    };
+    $query = "SELECT * FROM $tabela WHERE $where $order";
+    $execute = mysqli_query($connect, $query);
+    $results = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+    return $results;
 }
+
 function inserirUsuarios($connect) {
     if (isset($_POST['cadastrar']) AND !empty($_POST['email']) AND !empty($_POST['senha'])) {
         $erros = array();
@@ -77,7 +81,7 @@ function inserirUsuarios($connect) {
             $executar = mysqli_query($connect, $query);
             if ($executar) {
                 echo "Usuário inserido com sucesso!";
-				header("location: ../painel/users.php");
+                header("location: ../painel/users.php");
             } else {
                 echo "Erro ao inserir Usuário!";
             }
@@ -101,7 +105,6 @@ function deletar($connect, $tabela, $id) {
     }
 }
 
-
 $base_path = "/NerdSales_Project/";
 
 // Função para construir URLs
@@ -110,3 +113,77 @@ function url($path) {
     return $base_path . ltrim($path, '/');
 }
 
+function uploadProfileImage($connect) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadProfile"])) {
+        // Verificar se um arquivo foi enviado
+        if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
+            // Diretório onde as imagens serão armazenadas (verifique as permissões de escrita)
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/NerdSales_Project/painel/assets/imgs/';
+
+            // Gerar um nome único para o arquivo de imagem
+            $fileName = uniqid() . '_' . basename($_FILES["avatar"]["name"]);
+            $targetPath = $uploadDir . $fileName;
+
+            // Verificar se o arquivo é uma imagem
+            $imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
+            $validExtensions = array("jpg", "jpeg", "png", "gif");
+
+            if (!in_array($imageFileType, $validExtensions)) {
+                echo "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
+            } else {
+                // Verificar se já existe uma imagem de perfil para o usuário
+                $userId = $_SESSION['id'];
+                $userData = getProfileData($connect, $userId);
+                if ($userData && !empty($userData['caminho_imagem'])) {
+                    // Excluir imagem anterior
+                    $oldImagePath = $uploadDir . $userData['caminho_imagem'];
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Tentar mover o novo arquivo para o diretório de upload
+                if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetPath)) {
+                    // Atualizar o caminho da imagem na tabela de usuários
+                    $queryUpdate = "UPDATE users SET caminho_imagem = '$fileName' WHERE id = $userId";
+                    $resultUpdate = mysqli_query($connect, $queryUpdate);
+
+                    if ($resultUpdate) {
+                        echo "Imagem de perfil atualizada com sucesso!";
+                        // Redirecionar para a página de perfil ou outra página de sucesso
+                        header("Location: profile.php");
+                        exit();
+                    } else {
+                        echo "Erro ao atualizar imagem de perfil no banco de dados.";
+                    }
+                } else {
+                    echo "Erro ao fazer o upload do arquivo.";
+                }
+            }
+        } else {
+            echo "Por favor, selecione um arquivo para fazer o upload.";
+        }
+    }
+}
+
+function getProfileData($connect, $userId) {
+    $query = "SELECT *, caminho_imagem FROM users WHERE id = $userId";
+    $result = mysqli_query($connect, $query);
+    return mysqli_fetch_assoc($result);
+}
+
+
+// Verificar se o usuário está logado
+if (isset($_SESSION['ativa'])) {
+    $userId = $_SESSION['id'];
+    $userData = getProfileData($connect, $userId); // Obter dados do perfil do usuário
+
+    // Debug: Verificar os dados do usuário
+    // var_dump($userData); // Verificar se $userData está retornando corretamente
+
+    if (!$userData) {
+        // Se não encontrar dados do usuário, redirecionar para página de login
+        header("location: login.php");
+        exit();
+    }
+}
