@@ -19,6 +19,7 @@ require_once "functions.php";
                 <a href="index.php">Painel</a>
                 <a href="users.php">Gerenciar Usuários</a>
                 <a href="logout.php">Sair</a>
+				<a href="editar_usuarios.php">Editar Usuarios</a>
             </div>
         </nav>
         <?php

@@ -92,6 +92,49 @@ function inserirUsuarios($connect) {
         }
     }
 }
+function atualizarUsuarios($connect) {
+    if (isset($_POST['atualizarPerfil']) && !empty($_POST['id'])) {
+        $erros = array();
+        $id = mysqli_real_escape_string($connect, $_POST['id']); // Sanitizar ID
+
+        // Verificando se o email é válido
+        $email = !empty($_POST['email']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : '';
+        if ($email === false) {
+            $erros[] = "Email inválido!";
+        }
+
+        $nome = mysqli_real_escape_string($connect, $_POST['nome']);
+        $senha = !empty($_POST['senha']) && $_POST['senha'] === $_POST['repetesenha'] ? sha1($_POST['senha']) : '';
+
+        // Verificando se o email já está cadastrado para outro usuário
+        if ($email) {
+            $queryEmail = "SELECT id FROM users WHERE email = '$email' AND id != '$id'";
+            $buscaEmail = mysqli_query($connect, $queryEmail);
+            if (mysqli_num_rows($buscaEmail) > 0) {
+                $erros[] = "E-mail já cadastrado para outro usuário!";
+            }
+        }
+
+        if (empty($erros)) {
+            $query = "UPDATE users SET nome = '$nome'";
+            if ($email) $query .= ", email = '$email'";
+            if ($senha) $query .= ", senha = '$senha'";
+            $query .= " WHERE id = '$id'";
+
+            if (mysqli_query($connect, $query)) {
+                echo "Usuário atualizado com sucesso!";
+                header("location: ../painel/users.php");
+                exit();
+            } else {
+                echo "Erro ao atualizar Usuário!";
+            }
+        } else {
+            foreach ($erros as $erro) {
+                echo "<p>$erro</p>";
+            }
+        }
+    }
+}
 
 function deletar($connect, $tabela, $id) {
     if (!empty($id)) {
@@ -151,7 +194,7 @@ function uploadProfileImage($connect) {
                     if ($resultUpdate) {
                         echo "Imagem de perfil atualizada com sucesso!";
                         // Redirecionar para a página de perfil ou outra página de sucesso
-                        header("Location: profile.php");
+                        header("Location: index.php");
                         exit();
                     } else {
                         echo "Erro ao atualizar imagem de perfil no banco de dados.";
