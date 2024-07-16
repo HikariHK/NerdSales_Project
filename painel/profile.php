@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$seguranca = isset($_SESSION['ativa']) ? TRUE : header("location:login.php");
+$seguranca = isset($_SESSION['ativa']) ? TRUE : header("location:../pages/signin.php");
 
 require_once "functions.php";
 

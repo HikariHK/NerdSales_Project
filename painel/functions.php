@@ -193,8 +193,8 @@ function uploadProfileImage($connect) {
 
                     if ($resultUpdate) {
                         echo "Imagem de perfil atualizada com sucesso!";
-                        // Redirecionar para a página de perfil ou outra página de sucesso
-                        header("Location: index.php");
+                        // Redirecionar para a mesma página
+                        header("Location: " . $_SERVER['PHP_SELF']);
                         exit();
                     } else {
                         echo "Erro ao atualizar imagem de perfil no banco de dados.";
@@ -208,6 +208,7 @@ function uploadProfileImage($connect) {
         }
     }
 }
+
 
 function getProfileData($connect, $userId) {
     $query = "SELECT *, caminho_imagem FROM users WHERE id = $userId";
@@ -226,7 +227,7 @@ if (isset($_SESSION['ativa'])) {
 
     if (!$userData) {
         // Se não encontrar dados do usuário, redirecionar para página de login
-        header("location: login.php");
+        header("location: ../pages/signin.php");
         exit();
     }
 }

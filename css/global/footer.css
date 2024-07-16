@@ -1,6 +1,7 @@
 /* Style for footer */
 
 footer {
+    height: 100%;
     display: flex;
     justify-content: center;
     background: #C97233;

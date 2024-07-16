@@ -5,8 +5,8 @@ main{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100%;
-    padding: 5% 0% 5% 0%;
+    height: 100vh;
+    padding: 5% 0 5% 0;
 }
 
 main h2{
@@ -16,15 +16,14 @@ main h2{
 }
 
 .page {
-
     text-align: center;
     background-color: #C97233; /* Cor de fundo para o formulário */
     padding: 20px;
     box-sizing: border-box;
     border-radius: 7px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0% 32% 0% 32%;
 }
+
 
 .formLogin {
     background-color: #fff;

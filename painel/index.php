@@ -1,6 +1,6 @@
 <?php
 session_start();
-$seguranca = isset($_SESSION['ativa']) ? TRUE : header("location:login.php");
+$seguranca = isset($_SESSION['ativa']) ? TRUE : header("location:../pages/signin.php");
 require_once "functions.php";
 
 // Verificar se o usuário está logado
@@ -47,7 +47,7 @@ if ($seguranca) {
         <?php
     } else {
         // Se não encontrar dados do usuário, redirecionar para página de login
-        header("location: login.php");
+        header("location: ../pages/signin.php");
         exit();
     }
 }
