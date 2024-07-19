@@ -3,8 +3,7 @@ $host = "localhost";
 $db_user = "root";
 $db_pass = "";
 $db_name = "nerdsales";
-$port = "3308";
-$connect = mysqli_connect($host, $db_user, $db_pass, $db_name, $port);
+$connect = mysqli_connect($host, $db_user, $db_pass, $db_name);
 
 function login($connect) {
     if (isset($_POST['acessar']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
