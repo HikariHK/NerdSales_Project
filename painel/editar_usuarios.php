@@ -3,7 +3,7 @@ session_start();
 require_once('functions.php'); 
 
 if (!isset($_SESSION['ativa'])) {
-    header("location: ../pages/signin.php");
+    header("location: login.php");
     exit();
 }
 
@@ -11,7 +11,7 @@ $userId = $_SESSION['id'];
 $userData = getProfileData($connect, $userId); // Obter dados do perfil do usuário
 
 if (!$userData) {
-    header("location: ../pages/signin.php");
+    header("location: login.php");
     exit();
 }
 
@@ -36,7 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Perfil do usuário</a>
+        <a class="navbar-brand" href="#">Meu Perfil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="index.php">Painel</a></li>

@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+
+
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+    overflow-y: auto; /* Adiciona barra de rolagem */
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #cdcdcd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Adiciona barra de rolagem */
+    max-height: 100vh; /* Garante que a altura máxima seja 100% da viewport */
+}
+
+.content h2, .content h3 {
+    color: #000;
+    margin-bottom: 20px;
+}

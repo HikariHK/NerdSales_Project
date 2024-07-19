@@ -3,31 +3,28 @@ $host = "localhost";
 $db_user = "root";
 $db_pass = "";
 $db_name = "nerdsales";
-$connect = mysqli_connect($host, $db_user, $db_pass, $db_name);
+$port = "3308";
+$connect = mysqli_connect($host, $db_user, $db_pass, $db_name, $port);
 
 function login($connect) {
     if (isset($_POST['acessar']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
         $email = mysqli_real_escape_string($connect, $email);
         $senha = sha1($_POST['senha']);
-        $senha = mysqli_real_escape_string($connect, $senha);  //serve para limpar a string que, no caso, será enviada ao banco de dados.
+        $senha = mysqli_real_escape_string($connect, $senha);
 
-        // Busca o usuário pelo email
         $query = "SELECT * FROM users WHERE email = '$email'";
         $action = mysqli_query($connect, $query);
         $result = mysqli_fetch_array($action, MYSQLI_ASSOC);
 
-        // Verifica se encontrou algum resultado e se a senha está correta
         if ($result && $senha === $result['senha']) {
-            // Iniciar sessão
             session_start();
             $_SESSION['nome'] = $result['nome'];
             $_SESSION['id'] = $result['id'];
             $_SESSION['ativa'] = TRUE;
-            header("location: ../painel/index.php");
+            header("location: ../painel/index2.php");
             exit();
         } else {
-            // E-mail ou senha incorretos
             return "E-mail ou senha incorretos";
         }
     }
@@ -63,7 +60,7 @@ function inserirUsuarios($connect) {
         $erros = array();
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
         $nome = mysqli_real_escape_string($connect, $_POST['nome']);
-        $senha = sha1($_POST['senha']);  // Criptografa a senha
+        $senha = sha1($_POST['senha']);
 
         if ($_POST['senha'] != $_POST['repetesenha']) {
             $erros[] = "Senhas não conferem!";
@@ -92,12 +89,12 @@ function inserirUsuarios($connect) {
         }
     }
 }
+
 function atualizarUsuarios($connect) {
     if (isset($_POST['atualizarPerfil']) && !empty($_POST['id'])) {
         $erros = array();
-        $id = mysqli_real_escape_string($connect, $_POST['id']); // Sanitizar ID
+        $id = mysqli_real_escape_string($connect, $_POST['id']);
 
-        // Verificando se o email é válido
         $email = !empty($_POST['email']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : '';
         if ($email === false) {
             $erros[] = "Email inválido!";
@@ -106,7 +103,6 @@ function atualizarUsuarios($connect) {
         $nome = mysqli_real_escape_string($connect, $_POST['nome']);
         $senha = !empty($_POST['senha']) && $_POST['senha'] === $_POST['repetesenha'] ? sha1($_POST['senha']) : '';
 
-        // Verificando se o email já está cadastrado para outro usuário
         if ($email) {
             $queryEmail = "SELECT id FROM users WHERE email = '$email' AND id != '$id'";
             $buscaEmail = mysqli_query($connect, $queryEmail);
@@ -150,7 +146,6 @@ function deletar($connect, $tabela, $id) {
 
 $base_path = "/NerdSales_Project/";
 
-// Função para construir URLs
 function url($path) {
     global $base_path;
     return $base_path . ltrim($path, '/');
@@ -158,43 +153,34 @@ function url($path) {
 
 function uploadProfileImage($connect) {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadProfile"])) {
-        // Verificar se um arquivo foi enviado
         if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
-            // Diretório onde as imagens serão armazenadas (verifique as permissões de escrita)
             $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/NerdSales_Project/painel/assets/imgs/';
 
-            // Gerar um nome único para o arquivo de imagem
             $fileName = uniqid() . '_' . basename($_FILES["avatar"]["name"]);
             $targetPath = $uploadDir . $fileName;
 
-            // Verificar se o arquivo é uma imagem
             $imageFileType = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
             $validExtensions = array("jpg", "jpeg", "png", "gif");
 
             if (!in_array($imageFileType, $validExtensions)) {
                 echo "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
             } else {
-                // Verificar se já existe uma imagem de perfil para o usuário
                 $userId = $_SESSION['id'];
                 $userData = getProfileData($connect, $userId);
                 if ($userData && !empty($userData['caminho_imagem'])) {
-                    // Excluir imagem anterior
                     $oldImagePath = $uploadDir . $userData['caminho_imagem'];
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }
                 }
 
-                // Tentar mover o novo arquivo para o diretório de upload
                 if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetPath)) {
-                    // Atualizar o caminho da imagem na tabela de usuários
                     $queryUpdate = "UPDATE users SET caminho_imagem = '$fileName' WHERE id = $userId";
                     $resultUpdate = mysqli_query($connect, $queryUpdate);
 
                     if ($resultUpdate) {
                         echo "Imagem de perfil atualizada com sucesso!";
-                        // Redirecionar para a mesma página
-                        header("Location: " . $_SERVER['PHP_SELF']);
+                        header("Location: index2.php");
                         exit();
                     } else {
                         echo "Erro ao atualizar imagem de perfil no banco de dados.";
@@ -209,25 +195,19 @@ function uploadProfileImage($connect) {
     }
 }
 
-
 function getProfileData($connect, $userId) {
     $query = "SELECT *, caminho_imagem FROM users WHERE id = $userId";
     $result = mysqli_query($connect, $query);
     return mysqli_fetch_assoc($result);
 }
 
-
-// Verificar se o usuário está logado
 if (isset($_SESSION['ativa'])) {
     $userId = $_SESSION['id'];
-    $userData = getProfileData($connect, $userId); // Obter dados do perfil do usuário
-
-    // Debug: Verificar os dados do usuário
-    // var_dump($userData); // Verificar se $userData está retornando corretamente
+    $userData = getProfileData($connect, $userId);
 
     if (!$userData) {
-        // Se não encontrar dados do usuário, redirecionar para página de login
         header("location: ../pages/signin.php");
         exit();
     }
 }
+?>
