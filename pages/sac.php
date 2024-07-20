@@ -1,4 +1,20 @@
-<?php require_once __DIR__ . "/../painel/functions.php"; ?>
+<?php 
+require_once __DIR__ . "/../painel/functions.php";
+
+// Atualizar contato se o formulário for enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["atualizarContato"])) {
+    atualizarContato($connect);
+}
+
+// Buscar dados de contato
+$query = "SELECT * FROM contato WHERE id = 1"; // Considerando que só há um registro de contato
+$result = mysqli_query($connect, $query);
+$contactData = mysqli_fetch_assoc($result);
+
+$endereco = $contactData['endereco'] ?? '';
+$email = $contactData['email'] ?? '';
+$telefone = $contactData['telefone'] ?? '';
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,13 +80,12 @@
                     </div>
                 </div>
         </section>
-        <section>
+        <section class="contact-wrapper">
             <div class="paginacontato">
                 <div class="dadoscontato">
                     <div class="endereco">
                         <h5 class="texto">Nosso Endereço</h5>
-                        <a class="texto" href="https://maps.app.goo.gl/QhnvC6o5B4Y9VYxA6">Av. Jeronimo de Ornelas, 420
-                            <br>Santana - Porto Alegre</br>
+                        <a class="texto" href="https://maps.app.goo.gl/QhnvC6o5B4Y9VYxA6"><?echo "$endereco";?></br>
                             <br>CEP - 90800-041</br>
                         </a>
                         <p class="texto"></p>
@@ -79,12 +94,12 @@
                 
                     <div class="email">
                         <h5 class="texto">E-mail</h5>
-                        <a class="texto" href="mailto:ajudadiw@gmail.com?subject=&body=">ajudadiw@gmail.com</a>
+                        <a class="texto" href="mailto:ajudadiw@gmail.com?subject=&body="><?echo "$email";?></a>
                     </div>
 
                     <div class="telefone">
                         <h5 class="texto">Nosso Número</h5>
-                        <p class="texto">(32) 45621-45624</p>
+                        <p class="texto"><?echo "$telefone"?></p>
                         <a class="texto" href="https://wa.me/5532456214562">Nos chame no whatsapp!</a>
                     </div>
                 </div>

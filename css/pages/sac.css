@@ -1,5 +1,6 @@
 /* CSS Bel */
 
+
 .section1 {
     background-color: #F1EAF5;
     padding: 10px;
@@ -19,38 +20,43 @@
     color: #9670B3;
     margin-top: 1px;
     margin-left: 30px;
-    margin-bottom: 30px;
+}
+
+/* Estilo dos Cubos de Contato */
+
+.contact-wrapper{
+    color: white;
+    margin: 50px;
+}
+
+.paginacontato {
+    display: flex;
+    justify-content: center;
 }
 
 .dadoscontato {
     display: flex;
-    padding-top: 50px;
-    padding-bottom: 60px;
-    margin-left: 120px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
 }
 
-.endereco {
+.dadoscontato > div {
     background-color: #5C4681;
-    padding: 20px;
+    padding: 5px;
     border-radius: 20px;
+    text-align: center;
+    width: 250px;
 }
 
-.email {
-    background-color: #5C4681;
-    margin-left: 190px;
-    padding: 50px;
-    border-radius: 20px;
-}
-
-.telefone {
-    background-color: #5C4681;
-    margin-left: 200px;
-    padding: 30px;
-    border-radius: 20px;
-}
-
-.texto {
+.dadoscontato a,
+.dadoscontato p {
     color: white;
+    text-decoration: none;
+}
+
+.dadoscontato > div:hover {
+    background-color: #9670B3;
 }
 
 .endereco:hover {
@@ -105,9 +111,6 @@ input[type="checkbox"]:checked + label + .content {
     display: block;
 }
 
-.boxduvidas {
-    padding-bottom: 50px;
-}
 
 /* Estilo para manter o header fixo e ajustar o conteúdo principal */
 

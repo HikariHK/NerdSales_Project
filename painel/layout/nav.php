@@ -1,4 +1,11 @@
-<?php require_once "functions.php";
+<?php 
+
+require_once "functions.php";
+
+// Lidar com o logout
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
+    logout();
+}
 ?>
 <link rel="stylesheet" href="<?php echo url('painel/css/global/nav.css'); ?>">
 <nav class="navbar">
@@ -14,7 +21,7 @@
             <button class="dropdown-toggle" id="dropdown-toggle">▼</button>
             <div class="dropdown-menu" id="dropdown-menu">
                 <a href="profile.php">Editar perfil</a>
-                <a href="#">Sair</a>
+                <a href="logout.php">Sair</a>
             </div>
         </div>
     </div>

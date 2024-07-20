@@ -1,9 +1,12 @@
 <?php
+
+ob_start(); // Inicia o buffer de saíd
 $host = "localhost";
 $db_user = "root";
 $db_pass = "";
 $db_name = "nerdsales";
-$connect = mysqli_connect($host, $db_user, $db_pass, $db_name);
+$port = "3308";
+$connect = mysqli_connect($host, $db_user, $db_pass, $db_name, $port);
 
 function login($connect) {
     if (isset($_POST['acessar']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
@@ -21,7 +24,7 @@ function login($connect) {
             $_SESSION['nome'] = $result['nome'];
             $_SESSION['id'] = $result['id'];
             $_SESSION['ativa'] = TRUE;
-            header("location: ../painel/index2.php");
+            header("location: ../painel/index.php");
             exit();
         } else {
             return "E-mail ou senha incorretos";
@@ -76,8 +79,8 @@ function inserirUsuarios($connect) {
             $query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$nome', '$email', '$senha', NOW())";
             $executar = mysqli_query($connect, $query);
             if ($executar) {
-                echo "Usuário inserido com sucesso!";
-                header("location: ../painel/users.php");
+                header("location: users.php"); // Redireciona para a página users.php
+                exit(); // Garante que o script pare de executar após o redirecionamento
             } else {
                 echo "Erro ao inserir Usuário!";
             }
@@ -88,6 +91,42 @@ function inserirUsuarios($connect) {
         }
     }
 }
+
+function registrarUsuario($connect) {
+    if (isset($_POST['cadastrar']) AND !empty($_POST['email']) AND !empty($_POST['senha'])) {
+        $erros = array();
+        $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+        $nome = mysqli_real_escape_string($connect, $_POST['nome']);
+        $senha = sha1($_POST['senha']);
+
+        if ($_POST['senha'] != $_POST['repetesenha']) {
+            $erros[] = "Senhas não conferem!";
+        }
+
+        $queryEmail = "SELECT email FROM users WHERE email = '$email'";
+        $buscaEmail = mysqli_query($connect, $queryEmail);
+        $verifica = mysqli_num_rows($buscaEmail);
+        if (!empty($verifica)) {
+            $erros[] = "E-mail já cadastrado!";
+        }
+
+        if (empty($erros)) {
+            $query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$nome', '$email', '$senha', NOW())";
+            $executar = mysqli_query($connect, $query);
+            if ($executar) {
+                header("location: ../pages/signin.php"); // Redireciona para a página de login após o registro
+                exit(); // Garante que o script pare de executar após o redirecionamento
+            } else {
+                echo "Erro ao inserir Usuário!";
+            }
+        } else {
+            foreach ($erros as $erro) {
+                echo "<p>$erro</p>";
+            }
+        }
+    }
+}
+
 
 function atualizarUsuarios($connect) {
     if (isset($_POST['atualizarPerfil']) && !empty($_POST['id'])) {
@@ -151,6 +190,7 @@ function url($path) {
 }
 
 function uploadProfileImage($connect) {
+    $errorMessage = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadProfile"])) {
         if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
             $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/NerdSales_Project/painel/assets/imgs/';
@@ -162,7 +202,7 @@ function uploadProfileImage($connect) {
             $validExtensions = array("jpg", "jpeg", "png", "gif");
 
             if (!in_array($imageFileType, $validExtensions)) {
-                echo "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
+                $errorMessage = "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
             } else {
                 $userId = $_SESSION['id'];
                 $userData = getProfileData($connect, $userId);
@@ -178,20 +218,20 @@ function uploadProfileImage($connect) {
                     $resultUpdate = mysqli_query($connect, $queryUpdate);
 
                     if ($resultUpdate) {
-                        echo "Imagem de perfil atualizada com sucesso!";
-                        header("Location: index2.php");
+                        header("Location: profile.php");
                         exit();
                     } else {
-                        echo "Erro ao atualizar imagem de perfil no banco de dados.";
+                        $errorMessage = "Erro ao atualizar imagem de perfil no banco de dados.";
                     }
                 } else {
-                    echo "Erro ao fazer o upload do arquivo.";
+                    $errorMessage = "Erro ao fazer o upload do arquivo.";
                 }
             }
         } else {
-            echo "Por favor, selecione um arquivo para fazer o upload.";
+            $errorMessage = "Por favor, selecione um arquivo para fazer o upload.";
         }
     }
+    return $errorMessage;
 }
 
 function getProfileData($connect, $userId) {
@@ -209,4 +249,85 @@ if (isset($_SESSION['ativa'])) {
         exit();
     }
 }
-?>
+
+function atualizarBanner($connect) {
+    $errorMessage = "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadBanner"])) {
+        if (isset($_FILES["banner"]) && $_FILES["banner"]["error"] == 0) {
+            // Define o diretório de upload
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/NerdSales_Project/assets/imgs/';
+
+            // Obtém a extensão do arquivo original
+            $imageFileType = strtolower(pathinfo($_FILES["banner"]["name"], PATHINFO_EXTENSION));
+            $validExtensions = array("jpg", "jpeg", "png", "gif");
+
+            if (!in_array($imageFileType, $validExtensions)) {
+                $errorMessage = "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
+            } else {
+                // Gera um código único para o arquivo
+                $uniqueCode = uniqid('banner_', true);
+                $fileName = $uniqueCode . '.' . $imageFileType;
+                $targetPath = $uploadDir . $fileName;
+
+                // Move o arquivo para o diretório de upload
+                if (move_uploaded_file($_FILES["banner"]["tmp_name"], $targetPath)) {
+                    // Verifica se já existe um registro na tabela banners
+                    $queryCheck = "SELECT caminho_imagem FROM banners LIMIT 1";
+                    $resultCheck = mysqli_query($connect, $queryCheck);
+
+                    if (mysqli_num_rows($resultCheck) > 0) {
+                        // Se existir, pega o caminho da imagem atual
+                        $row = mysqli_fetch_assoc($resultCheck);
+                        $oldImagePath = $uploadDir . $row['caminho_imagem'];
+
+                        // Remove a imagem antiga
+                        if (file_exists($oldImagePath) && $oldImagePath !== $targetPath) {
+                            unlink($oldImagePath);
+                        }
+
+                        // Atualiza o caminho da imagem no banco de dados
+                        $query = "UPDATE banners SET caminho_imagem = '$fileName' WHERE id = 1"; // Supondo que o id do banner seja 1
+                    } else {
+                        // Se não existir, insere um novo registro
+                        $query = "INSERT INTO banners (caminho_imagem) VALUES ('$fileName')";
+                    }
+
+                    if (!mysqli_query($connect, $query)) {
+                        $errorMessage = "Erro ao atualizar imagem do banner no banco de dados.";
+                    }
+                } else {
+                    $errorMessage = "Erro ao fazer o upload do arquivo. Verifique as permissões do diretório.";
+                }
+            }
+        } else {
+            $errorMessage = "Por favor, selecione um arquivo para fazer o upload.";
+        }
+    }
+    return $errorMessage;
+}
+
+function atualizarContato($connect) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["atualizarContato"])) {
+        $id = 1; // Considerando que só há um registro de contato
+
+        // Recebendo os dados do formulário
+        $endereco = mysqli_real_escape_string($connect, $_POST['endereco']);
+        $email = mysqli_real_escape_string($connect, $_POST['email']);
+        $telefone = mysqli_real_escape_string($connect, $_POST['telefone']);
+
+        // Atualizando no banco de dados
+        $query = "UPDATE contato SET endereco = '$endereco', email = '$email', telefone = '$telefone' WHERE id = $id";
+
+        if (mysqli_query($connect, $query)) {
+            return "Dados de contato atualizados com sucesso!";
+        } else {
+            return "Erro ao atualizar os dados de contato: " . mysqli_error($connect);
+        }
+    }
+    return null;
+}
+
+
+
+ob_end_flush();
+

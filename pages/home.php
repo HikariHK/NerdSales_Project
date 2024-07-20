@@ -1,4 +1,9 @@
 <?php require_once __DIR__ . "/../painel/functions.php"; ?>
+<?php
+$queryBanner = "SELECT caminho_imagem FROM banners LIMIT 1";
+$resultBanner = mysqli_query($connect, $queryBanner);
+$banner = mysqli_fetch_assoc($resultBanner);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,18 +21,18 @@
 <body>
     <main id="main-content">
         <section id="banner" class="banner">
-            <img src="assets/imgs/banner.jpg" alt="">
+            <img src="<?php echo url('assets/imgs/' . $banner['caminho_imagem']); ?>" alt="Banner">
         </section>
         <section id="highlight" class="highlight">
             <h2>Destaques</h2>
             <div class="highlight-product">
-                <img src="/imgs/destaque1.jpg" alt="">
+                <img src="assets\imgs\destaque1.jpg" alt="">
             </div>
             <div class="highlight-product">
-                <img src="/imgs/destaque2.jpg" alt="">
+                <img src="assets\imgs\destaque2.jpg" alt="">
             </div>
             <div class="highlight-product">
-                <img src="/imgs/destaque3.jpg" alt="">
+                <img src="assets\imgs\destaque3.jpg" alt="">
             </div>
         </section>
         <section id="about" class="about">
@@ -45,13 +50,13 @@
         <section id="gallery" class="gallery">
             <h2>Galeria</h2>
             <div class="product-img">
-                <img src="/imgs/galeria1.jpg" alt="">
+                <img src="assets\imgs\galeria1.jpg" alt="">
             </div>
             <div class="product-img">
-                <img src="/imgs/galeria2.jpg" alt="">
+                <img src="assets\imgs\galeria2.jpg" alt="">
             </div>
             <div class="product-img">
-                <img src="/imgs/galeria3.jpg" alt="">
+                <img src="assets\imgs\galeria3.jpg" alt="">
             </div>
         </section>
     </main>

@@ -1,6 +1,8 @@
 <?php require_once "../painel/functions.php";
 if (isset($_POST['cadastrar'])) {
-        inserirUsuarios($connect);} ?>
+    registrarUsuario($connect);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
