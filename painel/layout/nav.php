@@ -1,6 +1,9 @@
 <?php 
 
-require_once "functions.php";
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(__DIR__) . '/');
+}
+require_once ROOT_PATH . 'functions.php';
 
 // Lidar com o logout
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
@@ -12,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
     <div class="user-menu">
         <?php
         if (!empty($userData['caminho_imagem'])) {
-            $imagePath = 'assets/imgs/' . $userData['caminho_imagem'];
+            $imagePath = url('painel/assets/imgs/' . $userData['caminho_imagem']);
             echo '<img src="' . $imagePath . '" class="user-avatar" alt="Imagem de Perfil">';
         }
         ?>
@@ -20,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
         <div class="dropdown">
             <button class="dropdown-toggle" id="dropdown-toggle">▼</button>
             <div class="dropdown-menu" id="dropdown-menu">
-                <a href="profile.php">Editar perfil</a>
+                <a href="<?php echo url('painel/pages/profile.php'); ?>">Editar perfil</a>
                 <a href="logout.php">Sair</a>
             </div>
         </div>

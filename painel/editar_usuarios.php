@@ -17,7 +17,7 @@ if (!$userData) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['atualizarPerfil'])) {
-        atualizarUsuarios($connect);
+        updateUsers($connect);
     }
 
     if (isset($_POST['uploadProfile'])) {

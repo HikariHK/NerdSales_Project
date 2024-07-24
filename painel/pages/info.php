@@ -1,30 +1,25 @@
 <?php
 session_start();
-require_once('functions.php');
+define('ROOT_PATH', dirname(__DIR__) . '/');
+require_once ROOT_PATH . 'functions.php';
+
 
 if (!isset($_SESSION['ativa'])) {
     header("location: ../pages/signin.php");
     exit();
 }
 
-$userId = $_SESSION['id'];
-$userData = getProfileData($connect, $userId);
-
-if (!$userData) {
-    header("location: ../pages/signin.php");
-    exit();
+$mensagemErro = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['atualizarContato'])) {
+    $endereco = $_POST['endereco'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $mensagemErro = updateInfos($connect, $endereco, $email, $telefone);
 }
 
-$errorMessage = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadBanner"])) {
-    $errorMessage = atualizarBanner($connect);
-}
-
-// Obter o caminho atual do banner
-$queryBanner = "SELECT caminho_imagem FROM banners LIMIT 1";
-$resultBanner = mysqli_query($connect, $queryBanner);
-$banner = mysqli_fetch_assoc($resultBanner);
+$contatoData = getInfos($connect);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -120,35 +115,30 @@ $banner = mysqli_fetch_assoc($resultBanner);
 </head>
 <body>
     <div class="wrapper" id="wrapper">
-        <?php include 'layout/sidebar.php'; ?>
+        <?php include '../layout/sidebar.php'; ?>
 
         <div class="content" id="content">
             <div class="nav">
-                <?php include 'layout/nav.php'; ?>
+                <?php include '../layout/nav.php'; ?>
             </div>
             <div class="main-content">
-                <h2>Atualizar Banner</h2>
-                <section id="atualizar-banner" class="mt-4">
-                    <h3>Imagem Atual do Banner</h3>
-                    <?php if (!empty($banner)): ?>
-                        <div class="mt-3">
-                            <img src="<?php echo url('assets/imgs/' . $banner['caminho_imagem']); ?>" class="img-banner" alt="Banner">
-                        </div>
+                <h2>Atualizar Contato</h2>
+                <section id="atualizar-contato" class="mt-4">
+                    <?php if (!empty($mensagemErro)): ?>
+                        <p class="mensagem-erro"><?php echo $mensagemErro; ?></p>
                     <?php endif; ?>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                        <div class="form-group <?php echo !empty($errorMessage) ? 'error' : ''; ?>">
-                            <label for="banner">Selecione a nova imagem para o banner:</label>
-                            <input type="file" id="banner" name="banner" accept="image/jpeg, image/png, image/gif" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="uploadBanner" value="Atualizar Banner">
-                        </div>
+                    <form method="POST" action="<?php echo url('painel/pages/info.php'); ?>">
+                        <label for="endereco">Endereço:</label><br>
+                        <textarea id="endereco" name="endereco" rows="4" cols="50"><?php echo htmlspecialchars($contatoData['endereco']); ?></textarea><br><br>
+
+                        <label for="email">E-mail:</label><br>
+                        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($contatoData['email']); ?>"><br><br>
+
+                        <label for="telefone">Telefone:</label><br>
+                        <input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($contatoData['telefone']); ?>"><br><br>
+
+                        <input type="submit" name="atualizarContato" value="Atualizar Dados">
                     </form>
-                    <?php
-                    if (!empty($errorMessage)) {
-                        echo '<div class="warning"><span class="material-symbols-outlined">warning</span><p class="mensagem-erro">' . $errorMessage . '</p></div>';
-                    }
-                    ?>
                 </section>
             </div>
         </div>

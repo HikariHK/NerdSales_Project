@@ -1,8 +1,8 @@
 <?php
 session_start();
 $seguranca = isset($_SESSION['ativa']) ? TRUE : header("location: ../pages/signin.php");
-require_once "functions.php";
-inserirUsuarios($connect); // Certifique-se de que esta linha está antes de qualquer saída HTML
+require_once "../functions.php";
+addUsers($connect); // Certifique-se de que esta linha está antes de qualquer saída HTML
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -130,11 +130,11 @@ inserirUsuarios($connect); // Certifique-se de que esta linha está antes de qua
 </head>
 <body>
     <div class="wrapper" id="wrapper">
-        <?php include 'layout/sidebar.php'; ?>
+        <?php include '../layout/sidebar.php'; ?>
 
         <div class="content" id="content">
             <div class="nav">
-                <?php include 'layout/nav.php'; ?>
+                <?php include '../layout/nav.php'; ?>
             </div>
             <div class="main-content">
             <?php if ($seguranca) { ?>
@@ -142,8 +142,8 @@ inserirUsuarios($connect); // Certifique-se de que esta linha está antes de qua
                 <?php
                 $tabela = "users";
                 $order = "nome";
-                $users = buscar($connect, $tabela, 1, $order);
-                inserirUsuarios($connect);
+                $users = search($connect, $tabela, 1, $order);
+                addUsers($connect);
                 if (isset($_GET['id']) && isset($_GET['nome'])) { ?>
                     <h2>Tem certeza de que deseja deletar o usuário <?php echo $_GET['nome']; ?>?</h2>
                     <form action="" method="post">
@@ -155,7 +155,7 @@ inserirUsuarios($connect); // Certifique-se de que esta linha está antes de qua
                 <?php
                 if (isset($_POST['deletar'])) {
                     if ($_SESSION['id'] != $_POST['id']) {
-                        deletar($connect, "users", $_POST['id']);
+                        dataDelete($connect, "users", $_POST['id']);
                     } else {
                         echo "Você não pode alterar seu próprio usuário";
                     }

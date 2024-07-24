@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once('functions.php'); 
+define('ROOT_PATH', dirname(__DIR__) . '/');
+require_once ROOT_PATH . 'functions.php';
 
 if (!isset($_SESSION['ativa'])) {
     header("location: ../pages/signin.php");
@@ -22,7 +23,7 @@ if (!$userData) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['atualizarPerfil'])) {
-        atualizarUsuarios($connect);
+        updateUsers($connect);
     }
 
     if (isset($_POST['uploadProfile'])) {
@@ -187,11 +188,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadProfile"])) {
 </head>
 <body>
     <div class="wrapper" id="wrapper">
-        <?php include 'layout/sidebar.php'; ?>
+        <?php include '../layout/sidebar.php'; ?>
 
         <div class="content" id="content">
             <div class="nav">
-                <?php include 'layout/nav.php'; ?>
+                <?php include '../layout/nav.php'; ?>
             </div>
             <div class="main-content">
                 <h2>Meu Perfil</h2>

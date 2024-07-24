@@ -1,6 +1,4 @@
 <?php
-
-ob_start(); // Inicia o buffer de saíd
 $host = "localhost";
 $db_user = "root";
 $db_pass = "";
@@ -8,18 +6,19 @@ $db_name = "nerdsales";
 $port = "3308";
 $connect = mysqli_connect($host, $db_user, $db_pass, $db_name, $port);
 
-function login($connect) {
+function login($connect)
+{
     if (isset($_POST['acessar']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
         $email = mysqli_real_escape_string($connect, $email);
-        $senha = sha1($_POST['senha']);
-        $senha = mysqli_real_escape_string($connect, $senha);
+        $password = sha1($_POST['senha']);
+        $password = mysqli_real_escape_string($connect, $password);
 
         $query = "SELECT * FROM users WHERE email = '$email'";
         $action = mysqli_query($connect, $query);
         $result = mysqli_fetch_array($action, MYSQLI_ASSOC);
 
-        if ($result && $senha === $result['senha']) {
+        if ($result && $password === $result['senha']) {
             session_start();
             $_SESSION['nome'] = $result['nome'];
             $_SESSION['id'] = $result['id'];
@@ -33,71 +32,77 @@ function login($connect) {
     return null;
 }
 
-function logout(){
+function logout()
+{
     session_start();
     session_unset();
     session_destroy();
     header("location: ../pages/signin.php");
 }
 
-function buscaUnica($connect, $tabela, $id){
-    $query = "SELECT * FROM $tabela WHERE id =".(int) $id;
+function uniqueSearch($connect, $tabela, $id)
+{
+    $query = "SELECT * FROM $tabela WHERE id =" . (int) $id;
     $execute = mysqli_query($connect, $query);
     $result = mysqli_fetch_assoc($execute);
     return $result;
-}   
+}
 
-function buscar($connect, $tabela, $where = 1, $order = ""){
-    if (!empty($order)){
+function search($connect, $tabela, $where = 1, $order = "")
+{
+    if (!empty($order)) {
         $order = "ORDER BY $order";
-    };
+    }
+    ;
     $query = "SELECT * FROM $tabela WHERE $where $order";
     $execute = mysqli_query($connect, $query);
     $results = mysqli_fetch_all($execute, MYSQLI_ASSOC);
     return $results;
 }
 
-function inserirUsuarios($connect) {
-    if (isset($_POST['cadastrar']) AND !empty($_POST['email']) AND !empty($_POST['senha'])) {
-        $erros = array();
+function addUsers($connect)
+{
+    if (isset($_POST['cadastrar']) and !empty($_POST['email']) and !empty($_POST['senha'])) {
+        $errors = array();
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-        $nome = mysqli_real_escape_string($connect, $_POST['nome']);
-        $senha = sha1($_POST['senha']);
+        $name = mysqli_real_escape_string($connect, $_POST['nome']);
+        $password = sha1($_POST['senha']);
 
         if ($_POST['senha'] != $_POST['repetesenha']) {
-            $erros[] = "Senhas não conferem!";
+            $errors[] = "Senhas não conferem!";
         }
 
         $queryEmail = "SELECT email FROM users WHERE email = '$email'";
-        $buscaEmail = mysqli_query($connect, $queryEmail);
-        $verifica = mysqli_num_rows($buscaEmail);
-        if (!empty($verifica)) {
-            $erros[] = "E-mail já cadastrado!";
+        $searchEmail = mysqli_query($connect, $queryEmail);
+        $verify = mysqli_num_rows($searchEmail);
+        if (!empty($verify)) {
+            $errors[] = "E-mail já cadastrado!";
         }
 
-        if (empty($erros)) {
-            $query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$nome', '$email', '$senha', NOW())";
-            $executar = mysqli_query($connect, $query);
-            if ($executar) {
+        if (empty($errors)) {
+            $query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$name', '$email', '$password', NOW())";
+            $execute = mysqli_query($connect, $query);
+            if ($execute) {
                 header("location: users.php"); // Redireciona para a página users.php
                 exit(); // Garante que o script pare de executar após o redirecionamento
             } else {
                 echo "Erro ao inserir Usuário!";
             }
         } else {
-            foreach ($erros as $erro) {
-                echo "<p>$erro</p>";
+            foreach ($errors as $error) {
+                echo "<p>$error</p>";
             }
         }
     }
 }
 
-function registrarUsuario($connect) {
-    if (isset($_POST['cadastrar']) AND !empty($_POST['email']) AND !empty($_POST['senha'])) {
+function signupUser($connect)
+{
+    if (isset($_POST['cadastrar']) and !empty($_POST['email']) and !empty($_POST['senha'])) {
         $erros = array();
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-        $nome = mysqli_real_escape_string($connect, $_POST['nome']);
-        $senha = sha1($_POST['senha']);
+        $name = mysqli_real_escape_string($connect, $_POST['nome']);
+        $password = sha1($_POST['senha']);
 
         if ($_POST['senha'] != $_POST['repetesenha']) {
             $erros[] = "Senhas não conferem!";
@@ -111,7 +116,7 @@ function registrarUsuario($connect) {
         }
 
         if (empty($erros)) {
-            $query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$nome', '$email', '$senha', NOW())";
+            $query = "INSERT INTO users (nome, email, senha, data_cadastro) VALUES ('$name', '$email', '$password', NOW())";
             $executar = mysqli_query($connect, $query);
             if ($executar) {
                 header("location: ../pages/signin.php"); // Redireciona para a página de login após o registro
@@ -128,31 +133,34 @@ function registrarUsuario($connect) {
 }
 
 
-function atualizarUsuarios($connect) {
+function updateUsers($connect)
+{
     if (isset($_POST['atualizarPerfil']) && !empty($_POST['id'])) {
-        $erros = array();
+        $errors = array();
         $id = mysqli_real_escape_string($connect, $_POST['id']);
 
         $email = !empty($_POST['email']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : '';
         if ($email === false) {
-            $erros[] = "Email inválido!";
+            $errors[] = "Email inválido!";
         }
 
-        $nome = mysqli_real_escape_string($connect, $_POST['nome']);
-        $senha = !empty($_POST['senha']) && $_POST['senha'] === $_POST['repetesenha'] ? sha1($_POST['senha']) : '';
+        $name = mysqli_real_escape_string($connect, $_POST['nome']);
+        $password = !empty($_POST['senha']) && $_POST['senha'] === $_POST['repetesenha'] ? sha1($_POST['senha']) : '';
 
         if ($email) {
             $queryEmail = "SELECT id FROM users WHERE email = '$email' AND id != '$id'";
-            $buscaEmail = mysqli_query($connect, $queryEmail);
-            if (mysqli_num_rows($buscaEmail) > 0) {
-                $erros[] = "E-mail já cadastrado para outro usuário!";
+            $searchEmail = mysqli_query($connect, $queryEmail);
+            if (mysqli_num_rows($searchEmail) > 0) {
+                $errors[] = "E-mail já cadastrado para outro usuário!";
             }
         }
 
-        if (empty($erros)) {
-            $query = "UPDATE users SET nome = '$nome'";
-            if ($email) $query .= ", email = '$email'";
-            if ($senha) $query .= ", senha = '$senha'";
+        if (empty($errors)) {
+            $query = "UPDATE users SET nome = '$name'";
+            if ($email)
+                $query .= ", email = '$email'";
+            if ($password)
+                $query .= ", senha = '$password'";
             $query .= " WHERE id = '$id'";
 
             if (mysqli_query($connect, $query)) {
@@ -163,16 +171,17 @@ function atualizarUsuarios($connect) {
                 echo "Erro ao atualizar Usuário!";
             }
         } else {
-            foreach ($erros as $erro) {
-                echo "<p>$erro</p>";
+            foreach ($errors as $error) {
+                echo "<p>$error</p>";
             }
         }
     }
 }
 
-function deletar($connect, $tabela, $id) {
+function dataDelete($connect, $table, $id)
+{
     if (!empty($id)) {
-        $query = "DELETE FROM $tabela WHERE id = " . (int)$id;
+        $query = "DELETE FROM $table WHERE id = " . (int) $id;
         $execute = mysqli_query($connect, $query);
         if ($execute) {
             echo "Dado deletado com sucesso!";
@@ -184,12 +193,14 @@ function deletar($connect, $tabela, $id) {
 
 $base_path = "/NerdSales_Project/";
 
-function url($path) {
+function url($path)
+{
     global $base_path;
     return $base_path . ltrim($path, '/');
 }
 
-function uploadProfileImage($connect) {
+function uploadProfileImage($connect)
+{
     $errorMessage = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadProfile"])) {
         if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
@@ -234,7 +245,8 @@ function uploadProfileImage($connect) {
     return $errorMessage;
 }
 
-function getProfileData($connect, $userId) {
+function getProfileData($connect, $userId)
+{
     $query = "SELECT *, caminho_imagem FROM users WHERE id = $userId";
     $result = mysqli_query($connect, $query);
     return mysqli_fetch_assoc($result);
@@ -250,7 +262,8 @@ if (isset($_SESSION['ativa'])) {
     }
 }
 
-function atualizarBanner($connect) {
+function updateSlideshow($connect)
+{
     $errorMessage = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["uploadBanner"])) {
         if (isset($_FILES["banner"]) && $_FILES["banner"]["error"] == 0) {
@@ -306,28 +319,43 @@ function atualizarBanner($connect) {
     return $errorMessage;
 }
 
-function atualizarContato($connect) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["atualizarContato"])) {
-        $id = 1; // Considerando que só há um registro de contato
+function updateInfos($connect, $address, $email, $phone) {
+    // Limpa e valida os dados de entrada
+    $address = mysqli_real_escape_string($connect, $address);
+    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+    $phone = mysqli_real_escape_string($connect, $phone);
 
-        // Recebendo os dados do formulário
-        $endereco = mysqli_real_escape_string($connect, $_POST['endereco']);
-        $email = mysqli_real_escape_string($connect, $_POST['email']);
-        $telefone = mysqli_real_escape_string($connect, $_POST['telefone']);
-
-        // Atualizando no banco de dados
-        $query = "UPDATE contato SET endereco = '$endereco', email = '$email', telefone = '$telefone' WHERE id = $id";
-
-        if (mysqli_query($connect, $query)) {
-            return "Dados de contato atualizados com sucesso!";
-        } else {
-            return "Erro ao atualizar os dados de contato: " . mysqli_error($connect);
-        }
+    if ($email === false) {
+        return "E-mail inválido!";
     }
-    return null;
+
+    // Atualiza os dados na tabela contato_sac
+    $query = "UPDATE contato SET endereco = '$address', email = '$email', telefone = '$phone' WHERE id = 1";
+    $result = mysqli_query($connect, $query);
+
+    if ($result) {
+        return "Informações de contato atualizadas com sucesso!";
+    } else {
+        return "Erro ao atualizar informações de contato: " . mysqli_error($connect);
+    }
 }
 
 
-
-ob_end_flush();
-
+function getInfos($connect) {
+    $query = "SELECT endereco, email, telefone FROM contato WHERE id = 1";
+    $result = mysqli_query($connect, $query);
+    
+    if (!$result) {
+        // Retorna um erro se a consulta falhar
+        die('Erro na consulta: ' . mysqli_error($connect));
+    }
+    
+    $data = mysqli_fetch_assoc($result);
+    
+    if (!$data) {
+        // Verifica se não há dados retornados
+        die('Nenhum dado encontrado para o contato SAC.');
+    }
+    
+    return $data;
+}
